@@ -9,9 +9,6 @@ BASE_URL = "https://agentrouter.org/v1"
 
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
-user_usage = {}
-FREE_LIMIT = 7
-
 SYSTEM_PROMPT = """You are a professional English to Hausa translator.
 If the user writes in English, translate to Hausa.
 If the user writes in Hausa, translate to English.
@@ -27,13 +24,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.effective_user.id
     text = update.message.text
-
-    usage = user_usage.get(user_id, 0)
-    if usage >= FREE_LIMIT:
-        await update.message.reply_text("Ka gama kyauta ta yau.")
-        return
 
     try:
         response = client.chat.completions.create(
@@ -47,7 +38,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         result = f"Error: {str(e)}"
 
-    user_usage[user_id] = usage + 1
     await update.message.reply_text(result)
 
 def main():
