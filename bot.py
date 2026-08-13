@@ -4,8 +4,8 @@ from openai import OpenAI
 import os
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-API_KEY = os.getenv("API_KEY")
-BASE_URL = "https://agentrouter.org/v1"
+API_KEY = os.getenv("API_KEY")  # This will be your Groq key
+BASE_URL = "https://api.groq.com/openai/v1"
 
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
@@ -28,7 +28,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         response = client.chat.completions.create(
-            model="gpt-5.5",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": text}
