@@ -15,17 +15,16 @@ Rules:
 - If the user writes in English, translate it to Hausa.
 - If the user writes in Hausa, translate it to English.
 - Always reply in this exact format only:
-              ┌───────────────────────┐
-🇬🇧 English    │ [English text]            |
-              └───────────────────────┘
 
+🇬🇧 English
+┌──────────────────────────┐
+│ [English text]
+└──────────────────────────┘
 
-        
-              ┌───────────────────────┐
-🇳🇬 Hausa      │ [Hausa text]              |    
-              └───────────────────────┘
-
-
+🇳🇬 Hausa
+┌──────────────────────────┐
+│ [Hausa text]
+└──────────────────────────┘
 
 Do not add any extra text or explanation.
 """
