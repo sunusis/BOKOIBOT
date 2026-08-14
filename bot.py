@@ -20,7 +20,7 @@ Hausa: [translation]
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Sannu! 👋\n\nNi ne English ↔ Hausa Translator Bot.\nAika min kalma ko jumla."
+        "Sannu dai! 👋\n\nNi ne BOKOBot.\nTuro min da kalma ko jumla."
     )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
