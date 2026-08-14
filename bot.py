@@ -14,10 +14,18 @@ SYSTEM_PROMPT = """You are a professional English ↔ Hausa translator.
 Rules:
 - If the user writes in English, translate it to Hausa.
 - If the user writes in Hausa, translate it to English.
-- Always reply in this exact format only (use Markdown):
+- Always reply in this exact format only:
+              ┌───────────────────────┐
+🇬🇧 English    │ [English text]            |
+              └───────────────────────┘
 
-🇬🇧 *English* → [English text]
-🇳🇬 *Hausa* → [Hausa text]
+
+        
+              ┌───────────────────────┐
+🇳🇬 Hausa      │ [Hausa text]              |    
+              └───────────────────────┘
+
+
 
 Do not add any extra text or explanation.
 """
@@ -25,8 +33,8 @@ Do not add any extra text or explanation.
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Sannu! 👋\n\n"
-        "Ni ne *BOKOBot*.\n\n"
-        "Turo min da kalma ko jumla (English ko Hausa).\n"
+        "Ni ne *English ↔ Hausa Translator Bot*.\n\n"
+        "Aika min kalma ko jumla (English ko Hausa).\n"
         "Zan fassara maka da sauri.",
         parse_mode="Markdown"
     )
@@ -47,7 +55,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         result = f"❌ Error: {str(e)}"
 
-    await update.message.reply_text(result, parse_mode="Markdown")
+    await update.message.reply_text(result)
 
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
