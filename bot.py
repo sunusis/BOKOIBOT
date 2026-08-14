@@ -14,17 +14,13 @@ SYSTEM_PROMPT = """You are a professional English ↔ Hausa translator.
 Rules:
 - If the user writes in English, translate it to Hausa.
 - If the user writes in Hausa, translate it to English.
-- Always reply in this exact format only:
+- Always reply in this exact format only (use Markdown):
 
-🇬🇧 English
-┌──────────────────────────┐
-│ [English text]
-└──────────────────────────┘
+🇬🇧 *English*
+[English text]
 
-🇳🇬 Hausa
-┌──────────────────────────┐
-│ [Hausa text]
-└──────────────────────────┘
+🇳🇬 *Hausa*
+[Hausa text]
 
 Do not add any extra text or explanation.
 """
@@ -54,7 +50,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         result = f"❌ Error: {str(e)}"
 
-    await update.message.reply_text(result)
+    await update.message.reply_text(result, parse_mode="Markdown")
 
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
