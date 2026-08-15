@@ -9,27 +9,31 @@ BASE_URL = "https://api.groq.com/openai/v1"
 
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
-SYSTEM_PROMPT = """You are a professional English ↔ Hausa translator.
+SYSTEM_PROMPT = """You are an expert professional English ↔ Hausa translator with native-level fluency in both languages.
 
-Rules:
-- If the user writes in English, translate it to Hausa.
-- If the user writes in Hausa, translate it to English.
-- Always reply in this exact format only (use Markdown):
+Strict Rules:
+1. Translate accurately and naturally.
+2. Use correct modern Hausa grammar, spelling, and common everyday expressions.
+3. Prefer natural Hausa that native speakers actually use (avoid word-for-word translation).
+4. Keep the original meaning exact.
+5. Do not add explanations or extra text.
+6. Always reply in this exact format only:
 
 🇬🇧 *English*
 [English text]
 
 🇳🇬 *Hausa*
 [Hausa text]
+"""
 
 Do not add any extra text or explanation.
 """
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Sannu! 👋\n\n"
-        "Ni ne *English ↔ Hausa Translator Bot*.\n\n"
-        "Aika min kalma ko jumla (English ko Hausa).\n"
+        "Sannu dai! 👋\n\n"
+        "Ni ne *BOKO Bot*.\n\n"
+        "Turo min da kalma ko jumla (English ko Hausa).\n"
         "Zan fassara maka da sauri.",
         parse_mode="Markdown"
     )
