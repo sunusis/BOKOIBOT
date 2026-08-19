@@ -9,7 +9,6 @@ BASE_URL = "https://api.groq.com/openai/v1"
 
 client = OpenAI(api_key=API_KEY, base_url=BASE_URL)
 
-# Store user mode and last answer
 user_data = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -74,7 +73,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         return
 
-    # If user wants Hausa translation of last answer
+    # Hausa translation of last answer
     if text.lower() == "hausa" and user_data[user_id].get("last_answer"):
         try:
             response = client.chat.completions.create(
@@ -99,8 +98,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Translation Mode
     if mode == "translation":
-        system_prompt = """You are a professional English ↔ Hausa translator.
-Reply in this exact format:
+        system_prompt = """You are an expert professional English ↔ Hausa translator with native-level fluency in both languages.
+
+Strict Rules:
+1. Translate accurately and naturally.
+2. Use correct modern Hausa grammar, spelling, and common everyday expressions.
+3. Prefer natural Hausa that native speakers actually use.
+4. Keep the original meaning exact.
+5. Always reply in this exact format only:
 
 🇬🇧 *English*
 [English text]
@@ -152,35 +157,6 @@ Do not translate to Hausa.
         await update.message.reply_text(final_reply, parse_mode="Markdown")
     except Exception as e:
         await update.message.reply_text(f"❌ Error: {str(e)}")
-
-def main():
-    app = Application.builder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))app.add_handler(MessageHandler(filters.TEXT, handle_message))
-    print("Bot is running...")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()        "Zan fassara maka da sauri.",
-        parse_mode="Markdown"
-    )
-
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
-
-    try:
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": text}
-            ],
-            temperature=0.3
-        )
-        result = response.choices[0].message.content
-    except Exception as e:
-        result = f"❌ Error: {str(e)}"
-
-    await update.message.reply_text(result, parse_mode="Markdown")
 
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
