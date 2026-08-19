@@ -27,10 +27,10 @@ Strict Rules:
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Sannu! 👋\n\n"
-        "Ni ne *BOKO Bot* – English ↔ Hausa Translator.\n\n"
-        "Aika min kalma ko jumla (English ko Hausa).\n"
-        "Zan fassara maka da sauri.",
+        "Sannu dai! 👋\n\n"
+        "Ni ne *BOKO Bot* – Mai fassarar English ↔ Hausa.\n\n"
+        "turo da kalma ko jumla (English ko Hausa).\n"
+        "Zan fassara maka ita cikin sauri.",
         parse_mode="Markdown"
     )
 
